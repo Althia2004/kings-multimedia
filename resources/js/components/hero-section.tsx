@@ -1,16 +1,14 @@
-import { lazy, Suspense } from 'react';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { lazy, Suspense } from 'react';
 import { login, register, dashboard } from '@/routes';
 import type { Auth } from '@/types/auth';
-import type { Team } from '@/types/teams';
 
 const CameraModel = lazy(() => import('@/components/camera-model'));
 
 interface HeroSectionProps {
     auth: Auth;
     canRegister: boolean;
-    currentTeam: Team | null;
 }
 
 function CameraFallback() {
@@ -38,8 +36,11 @@ function CameraFallback() {
     );
 }
 
-export default function HeroSection({ auth, canRegister, currentTeam }: HeroSectionProps) {
-    const dashboardUrl = currentTeam ? dashboard(currentTeam.slug) : '/';
+export default function HeroSection({
+    auth,
+    canRegister,
+}: HeroSectionProps) {
+    const dashboardUrl = dashboard();
 
     return (
         <section
@@ -87,12 +88,15 @@ export default function HeroSection({ auth, canRegister, currentTeam }: HeroSect
                         color: '#ffffff',
                     }}
                 >
-                  TheKingsVault
+                    TheKingsVault
                 </span>
 
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
                     {auth.user ? (
-                        <Link href={dashboardUrl} className="hero-nav-btn hero-nav-btn--primary">
+                        <Link
+                            href={dashboardUrl}
+                            className="hero-nav-btn hero-nav-btn--primary"
+                        >
                             Dashboard
                         </Link>
                     ) : (
@@ -101,7 +105,10 @@ export default function HeroSection({ auth, canRegister, currentTeam }: HeroSect
                                 Log in
                             </Link>
                             {canRegister && (
-                                <Link href={register()} className="hero-nav-btn hero-nav-btn--primary">
+                                <Link
+                                    href={register()}
+                                    className="hero-nav-btn hero-nav-btn--primary"
+                                >
                                     Register
                                 </Link>
                             )}
@@ -111,30 +118,62 @@ export default function HeroSection({ auth, canRegister, currentTeam }: HeroSect
             </nav>
 
             {/* Floating abstract shapes for depth */}
-            <div style={{
-                position: 'absolute', top: '8%', left: '-12%',
-                width: 520, height: 520, borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)',
-                filter: 'blur(60px)', pointerEvents: 'none',
-            }} />
-            <div style={{
-                position: 'absolute', bottom: '15%', right: '-8%',
-                width: 380, height: 280, borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)',
-                filter: 'blur(50px)', pointerEvents: 'none',
-            }} />
-            <div style={{
-                position: 'absolute', top: '35%', right: '12%',
-                width: 180, height: 180, borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 70%)',
-                filter: 'blur(35px)', pointerEvents: 'none',
-            }} />
-            <div style={{
-                position: 'absolute', top: '55%', left: '8%',
-                width: 140, height: 200, borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%)',
-                filter: 'blur(40px)', pointerEvents: 'none',
-            }} />
+            <div
+                style={{
+                    position: 'absolute',
+                    top: '8%',
+                    left: '-12%',
+                    width: 520,
+                    height: 520,
+                    borderRadius: '50%',
+                    background:
+                        'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)',
+                    filter: 'blur(60px)',
+                    pointerEvents: 'none',
+                }}
+            />
+            <div
+                style={{
+                    position: 'absolute',
+                    bottom: '15%',
+                    right: '-8%',
+                    width: 380,
+                    height: 280,
+                    borderRadius: '50%',
+                    background:
+                        'radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)',
+                    filter: 'blur(50px)',
+                    pointerEvents: 'none',
+                }}
+            />
+            <div
+                style={{
+                    position: 'absolute',
+                    top: '35%',
+                    right: '12%',
+                    width: 180,
+                    height: 180,
+                    borderRadius: '50%',
+                    background:
+                        'radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 70%)',
+                    filter: 'blur(35px)',
+                    pointerEvents: 'none',
+                }}
+            />
+            <div
+                style={{
+                    position: 'absolute',
+                    top: '55%',
+                    left: '8%',
+                    width: 140,
+                    height: 200,
+                    borderRadius: '50%',
+                    background:
+                        'radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%)',
+                    filter: 'blur(40px)',
+                    pointerEvents: 'none',
+                }}
+            />
 
             {/* 3D Canvas — center stage */}
             <div
@@ -167,7 +206,11 @@ export default function HeroSection({ auth, canRegister, currentTeam }: HeroSect
                 <motion.div
                     initial={{ opacity: 0, y: 32 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1, ease: [0.2, 0.9, 0.36, 1] }}
+                    transition={{
+                        duration: 0.5,
+                        delay: 0.1,
+                        ease: [0.2, 0.9, 0.36, 1],
+                    }}
                     style={{
                         textAlign: 'center',
                         padding: '0 24px',
@@ -204,11 +247,24 @@ export default function HeroSection({ auth, canRegister, currentTeam }: HeroSect
                     </p>
 
                     {/* CTA Buttons */}
-                    <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-                        <a href="#features" className="cta-btn cta-btn--primary">
+                    <div
+                        style={{
+                            display: 'flex',
+                            gap: 16,
+                            justifyContent: 'center',
+                            flexWrap: 'wrap',
+                        }}
+                    >
+                        <a
+                            href="#features"
+                            className="cta-btn cta-btn--primary"
+                        >
                             Book a Session
                         </a>
-                        <a href="#features" className="cta-btn cta-btn--secondary">
+                        <a
+                            href="#features"
+                            className="cta-btn cta-btn--secondary"
+                        >
                             View Gallery
                         </a>
                     </div>
@@ -239,11 +295,7 @@ export default function HeroSection({ auth, canRegister, currentTeam }: HeroSect
                             textTransform: 'uppercase',
                             color: 'rgba(255,255,255,0.3)',
                         }}
-                    >
-                       
-                    </span>
-                  
-                    
+                    ></span>
                 </motion.div>
             </div>
         </section>

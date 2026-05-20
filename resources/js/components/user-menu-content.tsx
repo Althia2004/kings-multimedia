@@ -24,6 +24,11 @@ export function UserMenuContent({ user }: Props) {
         router.flushAll();
     };
 
+    const handleLogoutSuccess = () => {
+        window.history.replaceState(null, '', '/login');
+        window.location.replace('/login');
+    };
+
     return (
         <>
             <DropdownMenuLabel className="p-0 font-normal">
@@ -50,8 +55,12 @@ export function UserMenuContent({ user }: Props) {
                 <Link
                     className="block w-full cursor-pointer"
                     href={logout()}
+                    method="post"
                     as="button"
+                    preserveState={false}
+                    preserveScroll={false}
                     onClick={handleLogout}
+                    onSuccess={handleLogoutSuccess}
                     data-test="logout-button"
                 >
                     <LogOut className="mr-2" />

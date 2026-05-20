@@ -67,7 +67,14 @@ export default function FeatureCards() {
                 >
                     Everything you need,
                     <br />
-                    <span style={{ color: 'rgba(255,255,255,0.4)', fontStyle: 'italic' }}>nothing you don't.</span>
+                    <span
+                        style={{
+                            color: 'rgba(255,255,255,0.4)',
+                            fontStyle: 'italic',
+                        }}
+                    >
+                        nothing you don't.
+                    </span>
                 </h2>
             </SectionReveal>
 
@@ -75,7 +82,8 @@ export default function FeatureCards() {
             <div
                 style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
+                    gridTemplateColumns:
+                        'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
                     gap: 20,
                     maxWidth: 1100,
                     margin: '0 auto',
@@ -83,14 +91,19 @@ export default function FeatureCards() {
             >
                 {features.map((feature, i) => {
                     const Icon = feature.icon;
+
                     return (
                         <SectionReveal key={feature.title} delay={i * 0.1}>
                             <div className="feature-card">
                                 <div className="feature-card__icon-wrap">
                                     <Icon size={22} strokeWidth={1.5} />
                                 </div>
-                                <h3 className="feature-card__title">{feature.title}</h3>
-                                <p className="feature-card__desc">{feature.description}</p>
+                                <h3 className="feature-card__title">
+                                    {feature.title}
+                                </h3>
+                                <p className="feature-card__desc">
+                                    {feature.description}
+                                </p>
                             </div>
                         </SectionReveal>
                     );

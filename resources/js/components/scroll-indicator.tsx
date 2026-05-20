@@ -12,7 +12,10 @@ export default function ScrollIndicator({ sections }: ScrollIndicatorProps) {
 
         sections.forEach(({ id }, index) => {
             const el = document.getElementById(id);
-            if (!el) return;
+
+            if (!el) {
+                return;
+            }
 
             const observer = new IntersectionObserver(
                 ([entry]) => {
@@ -65,6 +68,7 @@ export default function ScrollIndicator({ sections }: ScrollIndicatorProps) {
 
             {sections.map(({ id, label }, index) => {
                 const isActive = index === activeIndex;
+
                 return (
                     <button
                         key={id}
@@ -74,9 +78,13 @@ export default function ScrollIndicator({ sections }: ScrollIndicatorProps) {
                             width: isActive ? 2 : 6,
                             height: isActive ? 24 : 6,
                             borderRadius: isActive ? 1 : '50%',
-                            background: isActive ? '#ffffff' : 'rgba(255,255,255,0.25)',
+                            background: isActive
+                                ? '#ffffff'
+                                : 'rgba(255,255,255,0.25)',
                             border: isActive ? 'none' : '1px solid transparent',
-                            boxShadow: isActive ? '0 0 8px rgba(255,255,255,0.35)' : 'none',
+                            boxShadow: isActive
+                                ? '0 0 8px rgba(255,255,255,0.35)'
+                                : 'none',
                             cursor: 'pointer',
                             padding: 0,
                             transition: 'all 0.3s ease',

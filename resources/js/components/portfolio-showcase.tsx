@@ -2,14 +2,48 @@ import { useState, useEffect, useRef } from 'react';
 import SectionReveal from '@/components/section-reveal';
 
 const portfolioItems = [
-    { id: 1, type: 'image', category: 'Graduation', label: 'Batch 2024' },
-    { id: 2, type: 'image', category: 'Portrait', label: 'Studio Session' },
-    { id: 3, type: 'video', category: 'Events', label: 'Corporate Event' },
-    { id: 4, type: 'image', category: 'Graduation', label: 'Batch 2023' },
-    { id: 5, type: 'image', category: 'Portrait', label: 'Outdoor Session' },
-    { id: 6, type: 'video', category: 'Events', label: 'Debut Coverage' },
-    { id: 7, type: 'image', category: 'Behind the Scenes', label: 'On Location' },
-    { id: 8, type: 'image', category: 'Graduation', label: 'Batch 2025' },
+    {
+        id: 1,
+        type: 'image',
+        category: '18',
+        label: '2026',
+        image: '/images/portfolio/18photo.jpg',
+    },
+    {
+        id: 2,
+        type: 'image',
+        category: 'ArawNgPanabo',
+        label: 'pageant',
+        image: '/images/portfolio/binibini.jpg',
+    },
+    {
+        id: 3,
+        type: 'image',
+        category: 'Pictorial',
+        label: 'Solo Pictorial',
+        image: '/images/portfolio/photo2.jpg',
+    },
+    {
+        id: 4,
+        type: 'image',
+        category: 'Concert',
+        label: ' 2026 concert',
+        image: '/images/portfolio/maki.jpg',
+    },
+    {
+        id: 5,
+        type: 'image',
+        category: 'Portrait',
+        label: 'family',
+        image: '/images/portfolio/family.jpg',
+    },
+    {
+        id: 6,
+        type: 'image',
+        category: 'Events',
+        label: 'Debut Coverage',
+        image: '/images/portfolio/nica18.jpg',
+    },
 ];
 
 const categoryGradients: Record<string, string> = {
@@ -19,44 +53,51 @@ const categoryGradients: Record<string, string> = {
     'Behind the Scenes': 'linear-gradient(135deg, #181a18 0%, #202220 100%)',
 };
 
-function PlaceholderCard({ item }: { item: (typeof portfolioItems)[0] }) {
+function PlaceholderCard({ item }) {
     return (
         <div
             className="portfolio-card"
-            style={{ background: categoryGradients[item.category] ?? '#1c1c1c' }}
+            style={{
+                position:'relative',
+                overflow:'hidden',
+                backgroundImage: `
+                    linear-gradient(
+                        to top,
+                        rgba(0,0,0,0.75),
+                        rgba(0,0,0,0.2)
+                    ),
+                    url(${item.image})
+                `,
+                backgroundSize:'cover',
+                backgroundPosition:'center',
+                backgroundRepeat:'no-repeat',
+            }}
         >
             <div
                 style={{
-                    position: 'absolute',
-                    inset: 0,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 8,
-                    padding: '0 20px',
-                    textAlign: 'center',
+                    position:'absolute',
+                    bottom:20,
+                    left:20,
+                    zIndex:2,
                 }}
             >
                 <span
                     style={{
-                        fontFamily: '"DM Sans", sans-serif',
-                        fontSize: '0.6rem',
-                        fontWeight: 500,
-                        letterSpacing: '0.28em',
-                        textTransform: 'uppercase',
-                        color: 'rgba(255,255,255,0.22)',
+                        display:'block',
+                        fontSize:'0.6rem',
+                        letterSpacing:'0.28em',
+                        textTransform:'uppercase',
+                        color:'rgba(255,255,255,.65)',
                     }}
                 >
                     {item.category}
                 </span>
+
                 <span
                     style={{
-                        fontFamily: '"Cormorant Garamond", Georgia, serif',
-                        fontSize: '1rem',
-                        fontWeight: 400,
-                        color: 'rgba(255,255,255,0.4)',
-                        letterSpacing: '0.04em',
+                        fontFamily:'Cormorant Garamond',
+                        fontSize:'1rem',
+                        color:'white',
                     }}
                 >
                     {item.label}
@@ -65,7 +106,6 @@ function PlaceholderCard({ item }: { item: (typeof portfolioItems)[0] }) {
         </div>
     );
 }
-
 function MarqueeRow({
     items,
     direction,
@@ -74,8 +114,12 @@ function MarqueeRow({
     direction: 'left' | 'right';
 }) {
     const doubled = [...items, ...items];
+
     return (
-        <div className="marquee-wrap" style={{ overflow: 'hidden', width: '100%' }}>
+        <div
+            className="marquee-wrap"
+            style={{ overflow: 'hidden', width: '100%' }}
+        >
             <div className={`marquee-track marquee-track--${direction}`}>
                 {doubled.map((item, i) => (
                     <PlaceholderCard key={`${item.id}-${i}`} item={item} />
@@ -91,14 +135,21 @@ function SpotlightCarousel() {
     const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     const advance = (dir: number) => {
-        setActive((prev) => (prev + dir + portfolioItems.length) % portfolioItems.length);
+        setActive(
+            (prev) =>
+                (prev + dir + portfolioItems.length) % portfolioItems.length,
+        );
         setAnimKey((k) => k + 1);
     };
 
     const goTo = (i: number) => {
         setActive(i);
         setAnimKey((k) => k + 1);
-        if (timerRef.current) clearInterval(timerRef.current);
+
+        if (timerRef.current) {
+            clearInterval(timerRef.current);
+        }
+
         timerRef.current = setInterval(() => advance(1), 4000);
     };
 
@@ -107,21 +158,40 @@ function SpotlightCarousel() {
             setActive((prev) => (prev + 1) % portfolioItems.length);
             setAnimKey((k) => k + 1);
         }, 4000);
+
         return () => {
-            if (timerRef.current) clearInterval(timerRef.current);
+            if (timerRef.current) {
+                clearInterval(timerRef.current);
+            }
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const item = portfolioItems[active];
 
     return (
-        <div style={{ position: 'relative', width: '100%', maxWidth: 900, margin: '0 auto' }}>
+        <div
+            style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: 900,
+                margin: '0 auto',
+            }}
+        >
             {/* Main slide */}
             <div
                 key={animKey}
                 style={{
-                    background: categoryGradients[item.category] ?? '#1c1c1c',
+                    backgroundImage: `
+                    linear-gradient(
+                    to top,
+                    rgba(0,0,0,.8),
+                    rgba(0,0,0,.15)
+                    ),
+                    url(${item.image})
+                    `,
+                    backgroundSize:'cover',
+                    backgroundPosition:'center',
+                    backgroundRepeat:'no-repeat',
                     borderRadius: 4,
                     overflow: 'hidden',
                     position: 'relative',
@@ -138,7 +208,8 @@ function SpotlightCarousel() {
                         left: 0,
                         right: 0,
                         height: '55%',
-                        background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+                        background:
+                            'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
                         zIndex: 2,
                     }}
                 />
@@ -215,7 +286,9 @@ function SpotlightCarousel() {
                             height: 6,
                             borderRadius: 3,
                             background:
-                                i === active ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.18)',
+                                i === active
+                                    ? 'rgba(255,255,255,0.85)'
+                                    : 'rgba(255,255,255,0.18)',
                             border: 'none',
                             cursor: 'pointer',
                             padding: 0,

@@ -67,7 +67,13 @@ test('users can logout', function () {
     $response = $this->actingAs($user)->post(route('logout'));
 
     $this->assertGuest();
-    $response->assertRedirect(route('home'));
+    $response->assertRedirect(route('login'));
+    expect($response->headers->get('Cache-Control'))->toContain('no-store');
+    expect($response->headers->get('Cache-Control'))->toContain('no-cache');
+    expect($response->headers->get('Cache-Control'))->toContain('must-revalidate');
+    expect($response->headers->get('Cache-Control'))->toContain('max-age=0');
+    $response->assertHeader('Pragma', 'no-cache');
+    $response->assertHeader('Expires', '0');
 });
 
 test('users are rate limited', function () {

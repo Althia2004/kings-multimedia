@@ -84,10 +84,38 @@ export default function Register() {
                                 />
                             </div>
 
+                            <div className="grid gap-2">
+                                <Label htmlFor="contact_number">
+                                    Contact Number
+                                </Label>
+                                <Input
+                                    id="contact_number"
+                                    type="text"
+                                    tabIndex={5}
+                                    autoComplete="tel"
+                                    name="contact_number"
+                                    placeholder="Optional contact number"
+                                />
+                                <InputError message={errors.contact_number} />
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="address">Address</Label>
+                                <Input
+                                    id="address"
+                                    type="text"
+                                    tabIndex={6}
+                                    autoComplete="street-address"
+                                    name="address"
+                                    placeholder="Optional address"
+                                />
+                                <InputError message={errors.address} />
+                            </div>
+
                             <Button
                                 type="submit"
                                 className="mt-2 w-full"
-                                tabIndex={5}
+                                tabIndex={7}
                                 data-test="register-user-button"
                             >
                                 {processing && <Spinner />}
@@ -97,7 +125,7 @@ export default function Register() {
 
                         <div className="text-center text-sm text-muted-foreground">
                             Already have an account?{' '}
-                            <TextLink href={login()} tabIndex={6}>
+                            <TextLink href={login()} tabIndex={8}>
                                 Log in
                             </TextLink>
                         </div>

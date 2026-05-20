@@ -28,6 +28,18 @@ export default function VerifyEmail({ status }: { status?: string }) {
 
                         <TextLink
                             href={logout()}
+                            method="post"
+                            as="button"
+                            preserveState={false}
+                            preserveScroll={false}
+                            onSuccess={() => {
+                                window.history.replaceState(
+                                    null,
+                                    '',
+                                    '/login',
+                                );
+                                window.location.replace('/login');
+                            }}
                             className="mx-auto block text-sm"
                         >
                             Log out

@@ -1,13 +1,12 @@
 ﻿import { Head, usePage } from '@inertiajs/react';
-import { Instagram, Twitter, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
-import HeroSection from '@/components/hero-section';
+import { Instagram, Twitter, Mail } from 'lucide-react';
 import FeatureCards from '@/components/feature-cards';
+import HeroSection from '@/components/hero-section';
 import PortfolioShowcase from '@/components/portfolio-showcase';
 import ScrollIndicator from '@/components/scroll-indicator';
 import SectionReveal from '@/components/section-reveal';
 import type { Auth } from '@/types/auth';
-import type { Team } from '@/types/teams';
 
 function SectionDivider() {
     return (
@@ -60,13 +59,19 @@ export default function Welcome({
 }: {
     canRegister?: boolean;
 }) {
-    const { auth, currentTeam } = usePage().props as { auth: Auth; currentTeam: Team | null };
+    const { auth } = usePage().props as {
+        auth: Auth;
+    };
 
     return (
         <>
             <Head title="KINGS Media Graphics Design — Where Every Shot is Secured">
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossOrigin=""
+                />
                 <link
                     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
                     rel="stylesheet"
@@ -82,12 +87,9 @@ export default function Welcome({
                     overflowX: 'hidden',
                 }}
             >
-               
-
                 <HeroSection
                     auth={auth}
                     canRegister={canRegister}
-                    currentTeam={currentTeam}
                 />
 
                 <FeatureCards />
@@ -103,7 +105,8 @@ export default function Welcome({
                     id="how-it-works"
                     style={{
                         background: '#0d0d0d',
-                        padding: 'clamp(80px, 10vw, 140px) clamp(24px, 6vw, 80px)',
+                        padding:
+                            'clamp(80px, 10vw, 140px) clamp(24px, 6vw, 80px)',
                         position: 'relative',
                         overflow: 'hidden',
                     }}
@@ -115,7 +118,8 @@ export default function Welcome({
                             left: '10%',
                             right: '10%',
                             height: 1,
-                            background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)',
+                            background:
+                                'linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)',
                         }}
                     />
 
@@ -136,7 +140,8 @@ export default function Welcome({
                         </p>
                         <h2
                             style={{
-                                fontFamily: '"Cormorant Garamond", Georgia, serif',
+                                fontFamily:
+                                    '"Cormorant Garamond", Georgia, serif',
                                 fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
                                 fontWeight: 300,
                                 color: '#f0f0f0',
@@ -147,7 +152,12 @@ export default function Welcome({
                         >
                             Three steps to
                             <br />
-                            <em style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.45)' }}>
+                            <em
+                                style={{
+                                    fontStyle: 'italic',
+                                    color: 'rgba(255,255,255,0.45)',
+                                }}
+                            >
                                 your perfect gallery.
                             </em>
                         </h2>
@@ -158,16 +168,21 @@ export default function Welcome({
                             maxWidth: 1000,
                             margin: '0 auto',
                             display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+                            gridTemplateColumns:
+                                'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
                             gap: 24,
                         }}
                     >
                         {steps.map((step, i) => (
                             <SectionReveal key={step.number} delay={i * 0.15}>
                                 <div className="step-card">
-                                    <span className="step-number">{step.number}</span>
+                                    <span className="step-number">
+                                        {step.number}
+                                    </span>
                                     <h3 className="step-title">{step.title}</h3>
-                                    <p className="step-desc">{step.description}</p>
+                                    <p className="step-desc">
+                                        {step.description}
+                                    </p>
                                 </div>
                             </SectionReveal>
                         ))}
@@ -179,7 +194,8 @@ export default function Welcome({
                     id="footer"
                     style={{
                         background: '#080808',
-                        padding: 'clamp(64px, 8vw, 112px) clamp(24px, 6vw, 80px) 40px',
+                        padding:
+                            'clamp(64px, 8vw, 112px) clamp(24px, 6vw, 80px) 40px',
                         position: 'relative',
                         overflow: 'hidden',
                     }}
@@ -191,15 +207,22 @@ export default function Welcome({
                             left: '5%',
                             right: '5%',
                             height: 1,
-                            background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)',
+                            background:
+                                'linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)',
                         }}
                     />
 
                     <SectionReveal>
-                        <div style={{ textAlign: 'center', marginBottom: 'clamp(56px, 7vw, 80px)' }}>
+                        <div
+                            style={{
+                                textAlign: 'center',
+                                marginBottom: 'clamp(56px, 7vw, 80px)',
+                            }}
+                        >
                             <h2
                                 style={{
-                                    fontFamily: '"Cormorant Garamond", Georgia, serif',
+                                    fontFamily:
+                                        '"Cormorant Garamond", Georgia, serif',
                                     fontSize: 'clamp(2.4rem, 5.5vw, 4.2rem)',
                                     fontWeight: 300,
                                     color: '#f0f0f0',
@@ -210,7 +233,14 @@ export default function Welcome({
                             >
                                 Ready to secure
                                 <br />
-                                <span style={{ color: 'rgba(255,255,255,0.4)', fontStyle: 'italic' }}>your memories?</span>
+                                <span
+                                    style={{
+                                        color: 'rgba(255,255,255,0.4)',
+                                        fontStyle: 'italic',
+                                    }}
+                                >
+                                    your memories?
+                                </span>
                             </h2>
                             <p
                                 style={{
@@ -224,8 +254,8 @@ export default function Welcome({
                                     lineHeight: 1.7,
                                 }}
                             >
-                                Join photographers who trust TheKingsVault to organize their work
-                                and delight their clients.
+                                Join photographers who trust TheKingsVault to
+                                organize their work and delight their clients.
                             </p>
                             <a
                                 href={canRegister ? '/register' : '/login'}
@@ -250,7 +280,8 @@ export default function Welcome({
                         <div>
                             <span
                                 style={{
-                                    fontFamily: '"Cormorant Garamond", Georgia, serif',
+                                    fontFamily:
+                                        '"Cormorant Garamond", Georgia, serif',
                                     fontSize: '1.15rem',
                                     fontWeight: 600,
                                     color: '#ffffff',
@@ -273,16 +304,29 @@ export default function Welcome({
                             </span>
                         </div>
 
-                        <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                gap: 20,
+                                alignItems: 'center',
+                            }}
+                        >
                             <a
                                 href="#"
                                 aria-label="Instagram"
-                                style={{ color: 'rgba(255,255,255,0.35)', transition: 'color 0.2s' }}
+                                style={{
+                                    color: 'rgba(255,255,255,0.35)',
+                                    transition: 'color 0.2s',
+                                }}
                                 onMouseEnter={(e) =>
-                                    ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.9)')
+                                    ((
+                                        e.currentTarget as HTMLElement
+                                    ).style.color = 'rgba(255,255,255,0.9)')
                                 }
                                 onMouseLeave={(e) =>
-                                    ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)')
+                                    ((
+                                        e.currentTarget as HTMLElement
+                                    ).style.color = 'rgba(255,255,255,0.35)')
                                 }
                             >
                                 <Instagram size={18} strokeWidth={1.5} />
@@ -290,12 +334,19 @@ export default function Welcome({
                             <a
                                 href="#"
                                 aria-label="Twitter / X"
-                                style={{ color: 'rgba(255,255,255,0.35)', transition: 'color 0.2s' }}
+                                style={{
+                                    color: 'rgba(255,255,255,0.35)',
+                                    transition: 'color 0.2s',
+                                }}
                                 onMouseEnter={(e) =>
-                                    ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.9)')
+                                    ((
+                                        e.currentTarget as HTMLElement
+                                    ).style.color = 'rgba(255,255,255,0.9)')
                                 }
                                 onMouseLeave={(e) =>
-                                    ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)')
+                                    ((
+                                        e.currentTarget as HTMLElement
+                                    ).style.color = 'rgba(255,255,255,0.35)')
                                 }
                             >
                                 <Twitter size={18} strokeWidth={1.5} />
@@ -303,12 +354,19 @@ export default function Welcome({
                             <a
                                 href="mailto:hello@thekingsvault.com"
                                 aria-label="Email"
-                                style={{ color: 'rgba(255,255,255,0.35)', transition: 'color 0.2s' }}
+                                style={{
+                                    color: 'rgba(255,255,255,0.35)',
+                                    transition: 'color 0.2s',
+                                }}
                                 onMouseEnter={(e) =>
-                                    ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.9)')
+                                    ((
+                                        e.currentTarget as HTMLElement
+                                    ).style.color = 'rgba(255,255,255,0.9)')
                                 }
                                 onMouseLeave={(e) =>
-                                    ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)')
+                                    ((
+                                        e.currentTarget as HTMLElement
+                                    ).style.color = 'rgba(255,255,255,0.35)')
                                 }
                             >
                                 <Mail size={18} strokeWidth={1.5} />

@@ -1,4 +1,4 @@
-import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
+import DashboardLayout from './DashboardLayout';
 import type { BreadcrumbItem } from '@/types';
 
 export default function AppLayout({
@@ -9,8 +9,8 @@ export default function AppLayout({
     children: React.ReactNode;
 }) {
     return (
-        <AppLayoutTemplate breadcrumbs={breadcrumbs}>
+        <DashboardLayout breadcrumbs={breadcrumbs}>
             {children}
-        </AppLayoutTemplate>
+        </DashboardLayout>
     );
 }
